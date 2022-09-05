@@ -6,5 +6,10 @@
     <input name="username" type="text" value="">
     Password:
     <input name="password" type="password" value="">
-    <input type="submit" value="Sign up!">
+    <input type="submit" value="login!">
+{% if error %}
+{{error}}
+<br>
+<br>
+{% end if %}
 </form>

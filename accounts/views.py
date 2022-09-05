@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import User
+from django.contrib import auth
 
 # Create your views here.
 #accounts App - urls.py에서 설정한 signup을 views.py에서구현
@@ -15,3 +17,28 @@ from django.contrib.auth.forms import UserCreationForm
 #         'form' : form
 #     }
 #     return render(request, 'accounts/signup.html', context)
+
+#회원가입
+def signup(request):
+    if request.method == 'POST': #값이 넘겨졌을 경우
+        if request.POST('password1')==request.POST('password2'): #비번1, 2 입력값이 같다면
+            user = User.objects.create_user( #user객체를 새로 생성 (create_user함수 이용 유저 생성)
+                username=request.POST('username'), password=request.POST('passrod1')
+            )
+            return redirect('/')
+    return render(request, 'signup.html') #password1 != 2 인 경우 
+
+def login(request):
+    if request.method == 'POST': #login.html에서 넘어온 username과 password를 각 변수에 저장
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(request, username=username, password=password) #authenticate함수 self, username, password를 인자로 받은 후 정상적 인증된 경우 user객체 하나반환.없으면 None
+        #해당 username과 password와 일치하는 user객체를 가짐
+        #해당 user객체가 존재한다면 
+        if user is not None:
+            auth.login(request, user) #세션에 로그인 정보 생성&저장
+            return redirect('/')
+        else:
+            return render(request, 'login.html', {'error' : 'username or password is incorrect.'})
+    else:
+        return render(request, 'login.html')
