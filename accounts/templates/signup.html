@@ -1,0 +1,23 @@
+<!--views에서 UserCreationForm을 form에 넣어서 context로 html로 보냈음. 따라서 설정했던 '이름''비밀번호''비번확인'세가지떠야함-->
+<!-- 
+{% extends 'base.html' %}
+{% block body %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>회원가입 신청</button>
+    </form>
+{% endblock %} -->
+
+<h1>Sign up!</h1>
+
+<form method="POST" action="{% url 'signup'%}">
+{% csrf_token %}
+    Username:
+    <input name="username" type="text" value="">
+    Password:
+    <input name="password1" type="password" value="">
+    Confirm Password:
+    <input name="password2" type="password" vlue="">
+    <input type="submit" value="Sign up!">
+</form>
