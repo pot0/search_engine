@@ -1,12 +1,15 @@
+from distutils.command.upload import upload
+from ssl import Options
+from unittest.util import _MAX_LENGTH
 from django.db import models
-from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, PermissionsMixin)
+from django.contrib.auth.models import (BaseUserManager, AbstractUser)
 from django.conf import settings
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 # Create your models here.
 
 #서로의 모델 접근 1:1 (하나의 사용자는 하나의 프로필 가짐)
-
+'''
 class UserManager(BaseUserManager):
     def create_user(self, name, password=None):
         """
@@ -36,9 +39,13 @@ class UserManager(BaseUserManager):
         user.is_superuser = True #모든 권한이 있음을 지정
         user.save(using=self._db)
         return user
+'''
 
-class User(AbstractBaseUser, PermissionsMixin):
-    name = models.CharField(verbose_name='이름', max_length=30)
+class User(AbstractUser):
+    user = models.CharField(verbose_name='이름', max_length=64)
+    image = models.ImageField(verbose_name="프로필사진", upload_to ="")
+    #objects = UserManager()
 
-    objects = UserManager()
-    
+    def __str__(self):
+        return self.username
+

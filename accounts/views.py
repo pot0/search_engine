@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import User
+from django.contrib.auth.models import User
 from django.contrib import auth
 
 # Create your views here.
@@ -23,7 +23,7 @@ def signup(request):
     if request.method == 'POST': #값이 넘겨졌을 경우
         if request.POST('password1')==request.POST('password2'): #비번1, 2 입력값이 같다면
             user = User.objects.create_user( #user객체를 새로 생성 (create_user함수 이용 유저 생성)
-                username=request.POST('username'), password=request.POST('passrod1')
+                username=request.POST('username'), password=request.POST('password1')
             )
             return redirect('/')
     return render(request, 'signup.html') #password1 != 2 인 경우 

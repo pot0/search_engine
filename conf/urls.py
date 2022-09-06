@@ -20,6 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')), #include를 통해 accounts/urls.py 사용 가능
-    path('product/', include('product.urls')),
-    path('order/', include('order.urls/')),
+    # path('product/', include('product.urls')),
+    # path('order/', include('order.urls')),
 ]

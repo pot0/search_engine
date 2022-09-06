@@ -4,8 +4,8 @@ from django.db import models
 
 # Create your models here.
 class Order(models.Model):
-    user = models.ForeignKey('user.User', verbose_name='사용자', on_delete=models.CASCADE)
-    order = models.ForeignKey('product.Product', verbose_name='상품', on_delete=models.CASCADE)
+    # user = models.ForeignKey('user.User', verbose_name='사용자', on_delete=models.CASCADE)
+    # order = models.ForeignKey('product.Product', verbose_name='상품', on_delete=models.CASCADE)
     createDate = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modifiedDate = models.DateTimeField(auto_now_add=True, verbose_name='수정날짜')
 
